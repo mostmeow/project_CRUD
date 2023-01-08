@@ -1,0 +1,55 @@
+#insnapdiv {
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    position: relative;
+}
+#insnapdiv, 
+#insnapnav,
+p{
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+img {
+    scroll-snap-align: start;
+    flex: 1 1 auto;
+    min-width: 100%;
+}
+  
+  
+#insnapnav {
+    text-align: center;
+}
+#insnapnav a {
+    width: 10px;
+    height: 10px;
+    max-width: 10px;
+    margin: 0 3px;
+    display: inline-block;
+    overflow: hidden;
+    text-indent: -9999px;
+    border-radius: 100%;
+    background: #aaa;
+}
+/* #insnapnav a:hover,
+#insnapnav a:focus {
+    background: #ddd;
+} */
+/* #insnapnav a.active {
+    background: purple;
+} */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#insnapdiv::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+#insnapdiv {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* https://codepen.io/scottjehl/pen/jOEzYWw */

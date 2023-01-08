@@ -1,0 +1,55 @@
+/* CUSTOM FONTS */
+@font-face {
+    font-family: 'NotoSansThai-Regular';
+    font-weight: 400;
+    src: local('NotoSansThai-Regular'), 
+        url('../fonts/NotoSansThai/NotoSansThai-Regular.ttf') format("truetype");
+}
+
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+
+    --normalbtn: 50px;
+}
+
+html {
+    font-family: 'NotoSansThai-Regular', sans-serif !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background-color: white;
+    color: white;
+}
+a, p, h1, h2, h3, h4 {
+    -webkit-user-select: none !important;  /* Chrome all / Safari all */
+    -moz-user-select: none !important;     /* Firefox all */
+    -ms-user-select: none !important;      /* IE 10+ */
+    user-select: none !important;          /* Likely future */      
+}
+
+body {
+    font-family: 'NotoSansThai-Regular', sans-serif !important;
+}
+code, kbd, pre, samp {
+    font-family: 'NotoSansThai-Regular', sans-serif !important;
+}
+button, input, optgroup, select, textarea {
+    font-family: inherit
+}
+.tooltip {
+    font-family: 'NotoSansThai-Regular', sans-serif !important;
+}
+.popover {
+    font-family: 'NotoSansThai-Regular', sans-serif !important;
+}
+.text-monospace {
+    font-family: 'NotoSansThai-Regular', sans-serif !important;
+}
+
+i {
+    font-family: 'bootstrap-icons' !important;
+}
+
+.firsticon {
+    font-size: var(--normalbtn);
+    color: var(--blue);
+}

@@ -1,0 +1,43 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+    Hello!
+    <div class="firsticon">
+        <i class="bi bi-ui-checks-grid"></i>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+    <!-- INFINITE SNAP SCROLL -->
+    <div id="insnapdiv">
+        <img src="http://filamentgroup.github.io/snapper/demo/imgs/monkey.jpg" id="img1">
+        <img src="http://filamentgroup.github.io/snapper/demo/imgs/large.jpg" id="img2">
+        <img src="http://filamentgroup.github.io/snapper/demo/imgs/monks.jpg" id="img3">
+        <img src="http://filamentgroup.github.io/snapper/demo/imgs/interior.jpg" id="img4">
+        <img src="http://filamentgroup.github.io/snapper/demo/imgs/cows.jpg" id="img5">
+        <img src="http://filamentgroup.github.io/snapper/demo/imgs/bike.jpg" id="img6">
+    </div>
+      
+    <div id="insnapnav">
+        <a href="#img1">Jump to image 1</a>
+        <a href="#img2">Jump to image 2</a>
+        <a href="#img3">Jump to image 3</a>
+        <a href="#img4">Jump to image 4</a>
+        <a href="#img5">Jump to image 5</a>
+        <a href="#img6">Jump to image 6</a>
+    </div>
+
+    <!-- ADD JS -->
+    <script src="{% static 'app_general/js/infinitesnap.js' %}"></script>
+    
+</section>
+{% endblock %}
