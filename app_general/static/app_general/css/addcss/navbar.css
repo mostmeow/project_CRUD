@@ -1,11 +1,5 @@
-:root{
-    --white: rgb(253, 253, 253);
-    --black:rgb(38, 38, 38);
-    --light-black:rgba(80, 80, 80, 0.201);
-    --grey:rgba(80, 80, 80, 0.744);
-}
 
-nav{
+.nav {
     display:flex;
     background-color: rgb(253, 253, 253);
     padding:16px 32px;
@@ -13,17 +7,17 @@ nav{
     justify-content:space-between;
     align-items:center;
 }
-.nav-main{
+.nav-main {
     display:flex;
     gap:32px;
 }
-.logo{
+.logo {
     font-size:16px;
     text-transform: uppercase;
     font-weight:bold;
     letter-spacing: 4px;
 }
-.logo span{
+.logo span {
     color:rgb(169, 185, 185);
 }
 .nav-links{
@@ -31,13 +25,13 @@ nav{
     gap: 40px;
     list-style: none;
 }
-a{
+.nav a {
     text-decoration: none;
     color:rgb(38, 38, 38);
     letter-spacing: -0.5px;
     font-weight:200;
 }
-a:hover{
+.nav a:hover{
     color:rgb(122, 120, 120);
     transition: all 0.5s ease;
 }
@@ -66,14 +60,14 @@ a:hover{
     margin:8px;
 }
 
-.dropdown:hover>ul{
+.dropdown:hover > ul{
     display:list-item;
     position:absolute;
     list-style: none;
     transition: all 0.5s ease;
 }
 
-.btn{
+/* .btn{
     padding:8px 16px;
     border-radius:50px;
     border:none;
@@ -95,7 +89,7 @@ a:hover{
     background-color:var(--light-black);
     color:var(--black);
     transition:all 0.5s ease;
-}
+} */
 .nav-mobile{
   display:none;
   background-color:var(--light-black);
@@ -111,34 +105,34 @@ a:hover{
 /** dark mode switch
 **/
 @media only screen and (max-width: 915px) {
-  .nav-links, .cta{
-    display:none;
-    transition: all 0.5s ease;
-  }
-  .menu{
-    display:flex;
-    transition: all 0.5s ease;
-  }
-  .menu:hover>.nav-mobile{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    position:absolute;
-    top:0;
-    left:0;
-    list-style: none;
-    transition: all 0.5s ease;
-    width:100vw;
-    
-  }
+    .nav-links, .cta{
+        display:none;
+        transition: all 0.5s ease;
+    }
+    .menu{
+        display:flex;
+        transition: all 0.5s ease;
+    }
+    .menu:hover>.nav-mobile{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        position:absolute;
+        top:0;
+        left:0;
+        list-style: none;
+        transition: all 0.5s ease;
+        width:100vw;
+        
+    }
 
-  .dropdown:hover>ul{
-    position:relative;
-    background-color:transparent;
-  }
-  .nav-mobile li {
-    margin: 8px 0;
-  }
+    .dropdown:hover>ul{
+        position:relative;
+        background-color:transparent;
+    }
+    .nav-mobile li {
+        margin: 8px 0;
+    }
 
 }

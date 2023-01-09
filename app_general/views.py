@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 from django.core.paginator import Paginator
+
+from .forms import *
 
 # Create your views here.
 
@@ -12,7 +15,7 @@ def listitem(request):
     ranglist = range(100)
 
     for i in ranglist:
-        dummyarray.append("a")
+        dummyarray.append(i)
 
     # p = Paginator(ProductModel.objects.all(), 8)
     p = Paginator(dummyarray, 8)
@@ -26,3 +29,24 @@ def listitem(request):
         'nums':nums,
     }
     return render(request, 'app_general/listitem.html', context)
+
+def userform(request):
+
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+        else:
+            messages.error(request, 'โปรดกรอกข้อมูลให้ถูกต้อง')
+            return redirect('userform')
+
+        input_name = data['name']
+        print(input_name)
+
+    form = UserForm()
+    context = {'form':form}
+    return render(request, 'app_general/userform.html', context)
+
+def videoitem(request):
+    return render(request, 'app_general/videoitem.html')

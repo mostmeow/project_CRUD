@@ -32,8 +32,9 @@
 <body>
 
     {% include 'app_general/components/navbar.html' %}
-
-    {% include 'app_general/components/toasts/toasts.html' %}
+    
+    {% include 'app_general/components/toasts/successtoast.html' %}
+    {% include 'app_general/components/modals/modal.html' %}
 
     {% block content %}
     {% endblock %}
@@ -41,5 +42,7 @@
     <!-- ADD JS -->
     <!-- <script src="{% static 'app_general/js/infinitesnap.js' %}"></script> -->
     <script src="{% static 'app_general/js/initial_toast_bootstrap.js' %}"></script>
+    <script src="{% static 'app_general/js/initial_modal_bootstrap.js' %}"></script>
+
 </body>
 </html>

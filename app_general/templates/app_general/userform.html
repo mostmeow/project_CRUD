@@ -1,0 +1,27 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section>
+    
+    <form class="row g-3" action="{% url 'userform' %}" method="post" id="form">
+        {% csrf_token %}
+        <div class="col-auto">
+            <label for="staticEmail2" class="visually-hidden">name</label>
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="name">
+        </div>
+
+        <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">name</label>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="name">
+        </div>
+        {{form.name}}
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Confirm</button>
+        </div>
+    </form>
+
+</section>
+
+{% endblock %}
