@@ -8,6 +8,7 @@ from .forms import *
 # Create your views here.
 
 def home(request):
+    messages.success(request, 'ยินดีต้อนรับ')
     return render(request, 'app_general/home.html')
 
 def listitem(request):
