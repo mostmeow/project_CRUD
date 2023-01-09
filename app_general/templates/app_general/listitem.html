@@ -1,0 +1,77 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+
+    <section>
+        <!-- https://codepen.io/sdthornton/pen/wBZdXq -->
+        {% for item in pitems %}
+            <div style="box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); width: 50px; height: 50px; margin: 10px;">
+                {{item}}
+            </div>
+        {% endfor %}
+    </section>
+
+    <nav aria-label="...">            
+
+        <!-- หน้าที่ {{ pitems.number }} จาก {{ pitems.paginator.num_pages }} หน้า <br> -->
+
+        <ul class="pagination">
+
+            <!-- LEFT -->
+            {% if pitems.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1"><i class="bi bi-chevron-double-left" style="font-size: small;"></i>หน้าแรกสุด</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ pitems.previous_page_number }}"><i class="bi bi-chevron-left" style="font-size: small;"></i></a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link"><i class="bi bi-chevron-double-left" style="font-size: small;"></i>หน้าแรกสุด</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link"><i class="bi bi-chevron-left" style="font-size: small;"></i></a>
+                </li>
+            {% endif %}
+
+            <!-- MIDDLE -->
+            {% for i in nums %}
+                {% if pitems.number == forloop.counter %}
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    </li>
+                {% elif forloop.counter > pitems.number|add:'-3' and forloop.counter < pitems.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    </li>
+                {% elif forloop.counter == pitems.number|add:'-3' or forloop.counter == pitems.number|add:'3'%}
+                    <li class="page-item">
+                        <a class="page-link">...</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- RIGHT -->
+            {% if pitems.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ pitems.next_page_number }}"><i class="bi bi-chevron-right" style="font-size: small;"></i></a>
+                </li>
+                <li class="page-item">    
+                    <a class="page-link" href="?page={{ pitems.paginator.num_pages }}">หน้าท้ายสุด<i class="bi bi-chevron-double-right" style="font-size: small;"></i></a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link"><i class="bi bi-chevron-right" style="font-size: small;"></i></a>
+                </li>
+                <li class="page-item disabled">    
+                    <a class="page-link">หน้าท้ายสุด<i class="bi bi-chevron-double-right" style="font-size: small;"></i></a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+</section>
+{% endblock %}

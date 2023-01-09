@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" type="text/css" href="{% static 'app_general/bootstrap/bootstrap-5.3.0/css/bootstrap.min.css' %}"/>
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'app_general/bootstrap/bootstrap-5.3.0/css/bootstrap.css' %}"/> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app_general/bootstrap/bootstrap-5.3.0/css/bootstrap.css' %}"/>
     <script src="{% static 'app_general/bootstrap/bootstrap-5.3.0/js/bootstrap.bundle.min.js' %}"></script>
     <!-- <script src="{% static 'app_general/bootstrap/bootstrap-5.3.0/js/bootstrap.min.js' %}"></script> -->
     <!-- <script src="{% static 'app_general/bootstrap/bootstrap-5.3.0/js/bootstrap.js' %}"></script> -->
@@ -22,16 +25,21 @@
 
     <!-- ADD CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'app_general/css/addcss/infinitesnap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'app_general/css/addcss/navbar.css' %}"/>
 
     <title>CRUD</title>
 </head>
 <body>
+
+    {% include 'app_general/components/navbar.html' %}
+
+    {% include 'app_general/components/toasts/toasts.html' %}
 
     {% block content %}
     {% endblock %}
 
     <!-- ADD JS -->
     <!-- <script src="{% static 'app_general/js/infinitesnap.js' %}"></script> -->
-    
+    <script src="{% static 'app_general/js/initial_toast_bootstrap.js' %}"></script>
 </body>
 </html>
