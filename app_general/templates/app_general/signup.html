@@ -1,0 +1,51 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="signupsec">
+    <div class="signupdiv">
+
+        <div class="alert alert-warning" role="alert" id="alertsignup"></div>
+
+        <form class="row g-3" action="{% url 'signup' %}" onsubmit="return validateSignupForm()" method="post" name="mysignup" id="signup">
+            {% csrf_token %}
+            <span>ชื่อผู้ใช้</span>
+            <input class="form-control" type="text" placeholder="ชื่อผู้ใช้" aria-label="default input example" name="signupname">
+            
+            <span>รหัส</span>
+            <input class="form-control" type="password" placeholder="รหัส" aria-label="default input example" name="signuppass">
+            
+            <button type="submit" class="btn btn-primary mb-3">สมัคร</button>
+        </form>
+
+    </div>
+</section>
+
+<script>
+    const alertdiv = document.querySelector('#alertsignup')
+    
+    alertdiv.style.display = "none"
+
+    function validateSignupForm() {
+        let signupname = document.forms["mysignup"]["signupname"].value;
+        let signuppass = document.forms["mysignup"]["signuppass"].value;
+        
+        if (signupname == "" || signuppass == "") {
+
+            alertdiv.style.display = "block"
+            alertdiv.innerHTML = "กรุณาเติมช่องว่าง"
+
+            return false;
+        }
+
+        if (signuppass.length < 8) {
+            alertdiv.style.display = "block"
+            alertdiv.innerHTML = "รหัสมากกว่า 8 ตัว"
+
+            return false;
+        }
+    }
+</script>
+
+{% endblock %}

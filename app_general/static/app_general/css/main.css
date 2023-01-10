@@ -53,3 +53,27 @@ i {
     font-size: var(--normalbtn);
     color: var(--blue);
 }
+
+/* ------ */
+
+/* SIGNUP */
+.signupsec {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.signupdiv {
+    margin-top: 50px;
+    width: 60vw;
+}
+
+/* SIGNIN */
+.signinsec {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.signindiv {
+    margin-top: 50px;
+    width: 60vw;
+}
