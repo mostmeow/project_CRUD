@@ -9,8 +9,12 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 # django auth
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+# custom decorators
+from .decorators import *
 
 from .forms import *
 
@@ -18,13 +22,14 @@ from .forms import *
 
 
 
-
+@unauthenticated_user
 def home(request):
 
     # messages.success(request, 'ยินดีต้อนรับ')
 
     return render(request, 'app_general/home.html')
 
+@unauthenticated_user
 def listitem(request):
     dummyarray = []
     ranglist = range(100)
@@ -68,10 +73,13 @@ def userform(request):
     # context = {'form':form}
     return render(request, 'app_general/userform.html')
 
+@login_required(login_url='signin')
+@allowed_users(allowed_roles=['customer_crud'])
 def videoitem(request):
-    messages.error(request, 'หวงห้าม')
+    # messages.error(request, 'หวงห้าม')
     return render(request, 'app_general/videoitem.html')
 
+@unauthenticated_user
 def signup(request):
 
     if request.method == 'POST':
@@ -89,15 +97,22 @@ def signup(request):
 
         # myuser.is_active = False
 
+        # create user
         myuser = User.objects.create_user(username=signupname, password=signuppass)
         myuser.is_active = True
 
         myuser.save()
+
+        # add user group
+        group = Group.objects.get(name='customer_crud')
+        myuser.groups.add(group)
+
         messages.success(request, 'สร้างบัญชีสำเร็จ')
         return redirect('home')
 
     return render(request, 'app_general/signup.html')
 
+@unauthenticated_user
 def signin(request):
 
     if request.method == 'POST':
@@ -117,6 +132,7 @@ def signin(request):
 
     return render(request, 'app_general/signin.html')
 
+@login_required(login_url='signin')
 def signout(request):
     logout(request)
     messages.success(request, 'คุณได้ลงชื่อออกแล้ว')
