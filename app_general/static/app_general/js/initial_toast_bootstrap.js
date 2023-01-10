@@ -1,6 +1,6 @@
 
 const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('successToast')
+const toastLive = document.getElementById('successToast')
 
 // if (toastTrigger) {
 //     toastTrigger.addEventListener('click', () => {
@@ -11,7 +11,7 @@ const toastLiveExample = document.getElementById('successToast')
 // }
 
 window.onload = () => {
-    const toast = new bootstrap.Toast(toastLiveExample)
+    const toast = new bootstrap.Toast(toastLive)
 
     toast.show()
 }

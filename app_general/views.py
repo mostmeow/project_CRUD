@@ -32,22 +32,28 @@ def listitem(request):
     return render(request, 'app_general/listitem.html', context)
 
 def userform(request):
-
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        # --DJANGOFORM
+        # form = UserForm(request.POST)
 
-        if form.is_valid():
-            data = form.cleaned_data
-        else:
-            messages.error(request, 'โปรดกรอกข้อมูลให้ถูกต้อง')
-            return redirect('userform')
+        # if form.is_valid():
+        #     data = form.cleaned_data
+        # else:
+        #     messages.error(request, 'โปรดกรอกข้อมูลให้ถูกต้อง')
+        #     return redirect('userform')
 
-        input_name = data['name']
-        print(input_name)
+        # input_name = data['name']
+        # print(input_name)
 
-    form = UserForm()
-    context = {'form':form}
-    return render(request, 'app_general/userform.html', context)
+        # --JAVAFORM
+        print(request.POST['myname'])
+        messages.success(request, 'ขอบคุณที่ลงชื่อเข้าใช้')
+        return redirect('home')
+        
+    # form = UserForm()
+    # context = {'form':form}
+    return render(request, 'app_general/userform.html')
 
 def videoitem(request):
+    messages.error(request, 'หวงห้าม')
     return render(request, 'app_general/videoitem.html')

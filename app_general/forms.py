@@ -8,5 +8,5 @@ import datetime
 
 
 class UserForm(forms.Form):
-    name = forms.CharField(required=True, label='ชื่อ', widget=forms.TextInput(attrs={'placeholder':'ชื่อ'}))
+    name = forms.CharField(required=True, label='ชื่อ', widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'ชื่อ'}))
     # name = forms.CharField(required=True, label='ชื่อ', widget=forms.TextInput(attrs={'class': 'myfieldclass', 'placeholder':'ชื่อ'}))

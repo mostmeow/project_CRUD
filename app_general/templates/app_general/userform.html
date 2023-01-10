@@ -5,23 +5,36 @@
 
 <section>
     
-    <form class="row g-3" action="{% url 'userform' %}" method="post" id="form">
+    <form class="row g-3" action="{% url 'userform' %}" onsubmit="return validateForm()" method="post" name="myuserform" id="userform">
         {% csrf_token %}
-        <div class="col-auto">
-            <label for="staticEmail2" class="visually-hidden">name</label>
-            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="name">
-        </div>
 
         <div class="col-auto">
             <label for="inputPassword2" class="visually-hidden">name</label>
-            <input type="password" class="form-control" id="inputPassword2" placeholder="name">
+            <input type="text" class="form-control" id="inputPassword2" name="myname" placeholder="name">
         </div>
-        {{form.name}}
+
+        <!-- {{form.name}} -->
+
         <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Confirm</button>
+            <button type="submit" class="btn btn-primary mb-3" aria-required="true" id="confirmbtn">Confirm</button>
         </div>
+
     </form>
 
 </section>
+
+<script>
+    const inputename = document.querySelector('#userform')
+    const confirmbtn = document.querySelector('#confirmname')
+
+    function validateForm() {
+        let x = document.forms["myuserform"]["myname"].value;
+        console.log('x')
+        if (x == "") {
+            alert("กรุณาเติมช่องว่าง");
+            return false;
+        }
+    }
+</script>
 
 {% endblock %}
