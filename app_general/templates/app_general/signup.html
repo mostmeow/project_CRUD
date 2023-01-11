@@ -51,7 +51,7 @@
             return false;
         } else {
             Sendtoview();
-            return true
+            return true;
         }
     }
 
@@ -89,22 +89,23 @@
 
         document.querySelector('#spinner').style.display = "grid"
 
-        var url = ''
+        var url = '/api/data'
         fetch(url, {
             method: 'GET',
-            body:JSON.stringify()
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                page: 1,
+            }),
         })
-        .then((data) => {
-            console.log('Success')
-            setTimeout(() => {
-                document.querySelector('#spinner').style.display = "none"
-            }, 700);        
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data)
+            document.querySelector('#spinner').style.display = "none"
         })
         .catch((error) => {
-            console.log('Error:', error)
-            setTimeout(() => {
-                document.querySelector('#spinner').style.display = "none"
-            }, 700);
+            console.error('Error:', error)
         })
 
     }

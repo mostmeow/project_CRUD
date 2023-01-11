@@ -18,6 +18,8 @@ from .decorators import *
 
 from .forms import *
 
+import time
+
 # Create your views here.
 
 
@@ -99,6 +101,7 @@ def signup(request):
 
         # create user
         try:
+            time.sleep(10)
             myuser = User.objects.create_user(username=signupname, password=signuppass)
             myuser.is_active = True
 
