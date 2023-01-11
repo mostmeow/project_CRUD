@@ -4,9 +4,12 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .serializers import TaskSerializer
+
+# model
 from app_general.models import TaskModel
 
-from .serializers import TaskSerializer
+from django.contrib.auth.models import User, Group
 
 # Create your views here.
 
@@ -18,6 +21,8 @@ def apiOverview(request):
         'Create':'/task-create/',
         'Update':'/task-update/<str:pk>/',
         'Delete':'/task-delete/<str:pk>',
+
+        'Createuser':'/user-create/',
     }
     return Response(api_urls)
 
@@ -58,3 +63,14 @@ def taskDelete(request, pk):
     task.delete()
 
     return Response('Item Delete!')
+
+# //
+
+@api_view(['POST'])
+def taskCustomer(request):
+    serializer = TaskSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)

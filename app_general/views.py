@@ -18,8 +18,6 @@ from .decorators import *
 
 from .forms import *
 
-import time
-
 # Create your views here.
 
 
@@ -75,10 +73,9 @@ def userform(request):
     # context = {'form':form}
     return render(request, 'app_general/userform.html')
 
-@login_required(login_url='signin')
 @allowed_users(allowed_roles=['customer_crud'])
+@login_required(login_url='signin')
 def videoitem(request):
-    # messages.error(request, 'หวงห้าม')
     return render(request, 'app_general/videoitem.html')
 
 @unauthenticated_user
@@ -101,7 +98,6 @@ def signup(request):
 
         # create user
         try:
-            time.sleep(10)
             myuser = User.objects.create_user(username=signupname, password=signuppass)
             myuser.is_active = True
 

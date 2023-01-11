@@ -25,7 +25,7 @@ def allowed_users(allowed_roles=[]):
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
-                messages.error(request, 'กรุณาลงชื่อเข้าใช้')
+                messages.warning(request, 'กรุณาลงชื่อเข้าใช้')
                 return HttpResponseRedirect(reverse('signin'))
 
         return wrapper_func
