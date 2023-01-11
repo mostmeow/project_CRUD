@@ -50,37 +50,65 @@
 
             return false;
         } else {
+            Sendtoview();
             return true
         }
     }
 
-    $('#spinner').hide();
+    // $('#spinner').hide();
 
-    jQuery(function($) {
+    // jQuery(function($) {
         
-        $(document).ajaxSend(function() {
+    //     $(document).ajaxSend(function() {
 
-            if (validateSignupForm === true) {
-                $("#spinner").fadeIn(500);
-            }
+    //         if (validateSignupForm === true) {
+    //             $("#spinner").fadeIn(500);
+    //         }
 
-        });
+    //     });
 
-        $('#submitsignup').click(function () {
-            $.ajax({
-                type: 'GET',
-                success: function(data) {
-                    var d = $.parseJSON(data);
-                    alert(d.Test);
-                }
-            }).done(function() {
-                setTimeout(function() {
-                    $("#spinner").fadeOut(500);
-                }, 700);
-            })
+    //     $('#submitsignup').click(function () {
+    //         $.ajax({
+    //             type: 'GET',
+    //             success: function(data) {
+    //                 var d = $.parseJSON(data);
+    //                 alert(d.Test);
+    //             }
+    //         }).done(function() {
+    //             setTimeout(function() {
+    //                 $("#spinner").fadeOut(500);
+    //             }, 700);
+    //         })
+    //     })
+
+    // })
+
+    document.querySelector('#spinner').style.display = "none"
+
+    function Sendtoview() {
+
+        document.querySelector('#spinner').style.display = "grid"
+
+        var url = ''
+        fetch(url, {
+            method: 'GET',
+            body:JSON.stringify()
+        })
+        .then((data) => {
+            console.log('Success')
+            setTimeout(() => {
+                document.querySelector('#spinner').style.display = "none"
+            }, 700);        
+        })
+        .catch((error) => {
+            console.log('Error:', error)
+            setTimeout(() => {
+                document.querySelector('#spinner').style.display = "none"
+            }, 700);
         })
 
-    })
+    }
+
 </script>
 
 {% endblock %}
