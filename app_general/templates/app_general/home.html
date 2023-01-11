@@ -43,5 +43,46 @@
         Launch demo modal
     </button>
 
+    <button class="btn btn-primary paddbtn">PADDING</button>
+    <div class="paddingdiv">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque illum in sequi nemo nihil sapiente ex, eius culpa rem est ad minus mollitia modi perspiciatis suscipit sint quisquam possimus similique?
+    </div>
+
+    <div style="height: 200px; background-color: bisque;"></div>
+
+    <button class="btn btn-primary addclassbtn">ADDCLASS</button>
+    <div class="contentdiv">
+        <div>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti molestiae dolor fuga temporibus itaque numquam cumque perspiciatis. Consequuntur dolor inventore distinctio ullam, laborum earum fuga neque voluptate eos quibusdam assumenda.
+        </div>
+    </div>
+    <script>
+        const addclassbtn = document.querySelector('.addclassbtn')
+        const contentdiv = document.querySelector('.contentdiv')
+
+        addclassbtn.addEventListener('click', () => {
+            contentdiv.classList.toggle('contenttoggle')
+        })
+    </script>
+
+    <div style="height: 200px; background-color: bisque;"></div>
+
+    <button class="btn btn-primary translatebtn">TRANSLATE</button>
+    <div class="contenttranslate">
+        <div>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti molestiae dolor fuga temporibus itaque numquam cumque perspiciatis. Consequuntur dolor inventore distinctio ullam, laborum earum fuga neque voluptate eos quibusdam assumenda.
+        </div>
+    </div>
+    <script>
+        const translatebtn = document.querySelector('.translatebtn')
+        const contenttranslate = document.querySelector('.contenttranslate')
+
+        translatebtn.addEventListener('click', () => {
+            contenttranslate.classList.toggle('toggletranslate')
+        })
+    </script>
+
+    <div style="height: 200px; background-color: bisque;"></div>
+
 </section>
 {% endblock %}

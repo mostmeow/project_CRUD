@@ -67,6 +67,22 @@ i {
     width: 60vw;
 }
 
+#spinner {
+    position: absolute;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+#spinner div {
+    width: 50px;
+    height: 50px;
+}
 /* SIGNIN */
 .signinsec {
     display: grid;
@@ -76,4 +92,50 @@ i {
 .signindiv {
     margin-top: 50px;
     width: 60vw;
+}
+
+/* // */
+.paddingdiv {
+    overflow: hidden;
+    transition-duration: 3s;
+    height: 0;
+}
+.paddbtn:focus + .paddingdiv {
+    height: auto;
+}
+
+/* // */
+
+.contentdiv {
+    overflow: hidden;
+    height: auto;
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out;
+}
+.contentdiv div {
+    padding: 20px;
+}
+.contenttoggle {
+    max-height: 500px;
+}
+
+/* // */
+
+.contenttranslate {
+    display: block;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    position: fixed;
+    overflow: hidden;
+    background-color: white;
+    top: 100px;
+    left: 0;
+    width: 200px;
+}
+.contenttranslate div {
+    padding: 20px;
+}
+.toggletranslate {
+    display: block;
+    transform: translateX(0);
 }

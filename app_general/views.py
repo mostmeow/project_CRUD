@@ -98,17 +98,20 @@ def signup(request):
         # myuser.is_active = False
 
         # create user
-        myuser = User.objects.create_user(username=signupname, password=signuppass)
-        myuser.is_active = True
+        try:
+            myuser = User.objects.create_user(username=signupname, password=signuppass)
+            myuser.is_active = True
 
-        myuser.save()
+            myuser.save()
 
-        # add user group
-        group = Group.objects.get(name='customer_crud')
-        myuser.groups.add(group)
+            # add user group
+            group = Group.objects.get(name='customer_crud')
+            myuser.groups.add(group)
 
-        messages.success(request, 'สร้างบัญชีสำเร็จ')
-        return redirect('home')
+            messages.success(request, 'สร้างบัญชีสำเร็จ')
+            # return redirect('home')
+        except:
+            messages.error(request, 'ผิดพลาด')
 
     return render(request, 'app_general/signup.html')
 

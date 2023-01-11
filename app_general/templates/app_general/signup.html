@@ -16,10 +16,17 @@
             <span>รหัส</span>
             <input class="form-control" type="password" placeholder="รหัส" aria-label="default input example" name="signuppass">
             
-            <button type="submit" class="btn btn-primary mb-3">สมัคร</button>
+            <button type="submit" class="btn btn-primary mb-3" id="submitsignup">สมัคร</button>
         </form>
 
     </div>
+
+    <div id="spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
 </section>
 
 <script>
@@ -37,15 +44,43 @@
             alertdiv.innerHTML = "กรุณาเติมช่องว่าง"
 
             return false;
-        }
-
-        if (signuppass.length < 8) {
+        } else if (signuppass.length < 8) {
             alertdiv.style.display = "block"
             alertdiv.innerHTML = "รหัสมากกว่า 8 ตัว"
 
             return false;
+        } else {
+            return true
         }
     }
+
+    $('#spinner').hide();
+
+    jQuery(function($) {
+        
+        $(document).ajaxSend(function() {
+
+            if (validateSignupForm === true) {
+                $("#spinner").fadeIn(500);
+            }
+
+        });
+
+        $('#submitsignup').click(function () {
+            $.ajax({
+                type: 'GET',
+                success: function(data) {
+                    var d = $.parseJSON(data);
+                    alert(d.Test);
+                }
+            }).done(function() {
+                setTimeout(function() {
+                    $("#spinner").fadeOut(500);
+                }, 700);
+            })
+        })
+
+    })
 </script>
 
 {% endblock %}
