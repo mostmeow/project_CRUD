@@ -13,6 +13,8 @@ from app_general.models import TaskModel
 
 from django.contrib.auth.models import User, Group
 
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 
 @api_view(['GET'])
@@ -42,11 +44,18 @@ def taskDetail(request, pk):
 
 @api_view(['POST'])
 def taskCreate(request):
+    # GETD ATA
 
+    # use Html form
+    # taskname = request.POST['taskname']
     # //
-    taskname = request.POST['taskname']
+
+    # use fetch json
+    getdata = json.loads(request.body)
+    taskname = getdata['name']
     # //
     
+    # PREPARE DATA
     serializer = TaskSerializer(data=request.data)
 
     if serializer.is_valid():

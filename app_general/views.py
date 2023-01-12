@@ -54,7 +54,7 @@ def listitem(request):
     return render(request, 'app_general/listitem.html', context)
 
 def taskcreate(request):
-    if request.method == 'POST':
+    # if request.method == 'POST':
         # --DJANGOFORM
         # form = UserForm(request.POST)
 
@@ -68,9 +68,7 @@ def taskcreate(request):
         # print(input_name)
 
         # --JAVAFORM
-        print(request.POST['taskname'])
-        messages.success(request, 'ขอบคุณที่ลงชื่อเข้าใช้')
-        return redirect('home')
+        # print(request.POST['taskname'])
         
     # form = UserForm()
     # context = {'form':form}

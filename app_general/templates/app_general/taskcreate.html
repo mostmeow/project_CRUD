@@ -5,7 +5,7 @@
 
 <section>
     
-    <form class="row g-3" action="{% url 'task-create' %}" onsubmit="return validateForm()" method="post" name="taskform" id="mytaskform">
+    <form class="row g-3" action="{% url 'taskcreate' %}" onsubmit="return validateForm()" method="post" name="taskform" id="mytaskform">
         {% csrf_token %}
      
         <div class="col-auto">
@@ -28,12 +28,38 @@
     const confirmbtn = document.querySelector('#confirmname')
 
     function validateForm() {
-        let x = document.forms["taskform"]["taskname"].value;
-        console.log('x')
-        if (x == "") {
+        let taskname = document.forms["taskform"]["taskname"].value;
+        // console.log('taskname')
+        if (taskname == "") {
             alert("กรุณาเติมช่องว่าง");
             return false;
+        } else {
+            SendtoApiview(taskname)
+            return true;
         }
+        
+    }
+
+    function SendtoApiview(taskname) {
+
+        var url = 'apitask-create/'
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'name': taskname,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data)
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        })
+
     }
 </script>
 
