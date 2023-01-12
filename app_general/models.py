@@ -7,4 +7,4 @@ class TaskModel(models.Model):
     finished = models.BooleanField(default=False, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)

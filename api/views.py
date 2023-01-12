@@ -1,5 +1,7 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.http import JsonResponse
+import json
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -40,9 +42,21 @@ def taskDetail(request, pk):
 
 @api_view(['POST'])
 def taskCreate(request):
+
+    # //
+    taskname = request.POST['taskname']
+    # //
+    
     serializer = TaskSerializer(data=request.data)
 
     if serializer.is_valid():
+        # //       
+        this_dict = serializer.validated_data
+        this_dict['name'] = taskname
+
+        # print(this_dict)
+        # //
+
         serializer.save()
 
     return Response(serializer.data)
@@ -63,14 +77,3 @@ def taskDelete(request, pk):
     task.delete()
 
     return Response('Item Delete!')
-
-# //
-
-@api_view(['POST'])
-def taskCustomer(request):
-    serializer = TaskSerializer(data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)

@@ -5,12 +5,12 @@
 
 <section>
     
-    <form class="row g-3" action="{% url 'userform' %}" onsubmit="return validateForm()" method="post" name="myuserform" id="userform">
+    <form class="row g-3" action="{% url 'task-create' %}" onsubmit="return validateForm()" method="post" name="taskform" id="mytaskform">
         {% csrf_token %}
-
+     
         <div class="col-auto">
             <label for="inputPassword2" class="visually-hidden">name</label>
-            <input type="text" class="form-control" id="inputPassword2" name="myname" placeholder="name">
+            <input type="text" class="form-control" id="inputPassword2" name="taskname" placeholder="name">
         </div>
 
         <!-- {{form.name}} -->
@@ -28,7 +28,7 @@
     const confirmbtn = document.querySelector('#confirmname')
 
     function validateForm() {
-        let x = document.forms["myuserform"]["myname"].value;
+        let x = document.forms["taskform"]["taskname"].value;
         console.log('x')
         if (x == "") {
             alert("กรุณาเติมช่องว่าง");

@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import *
 
 from .forms import *
+from .models import *
 
 # Create your views here.
 
@@ -31,14 +32,16 @@ def home(request):
 
 @unauthenticated_user
 def listitem(request):
-    dummyarray = []
-    ranglist = range(100)
+    # dummyarray = []
+    # ranglist = range(100)
 
-    for i in ranglist:
-        dummyarray.append(i)
+    # for i in ranglist:
+    #     dummyarray.append(i)
 
     # p = Paginator(ProductModel.objects.all(), 8)
-    p = Paginator(dummyarray, 8)
+    # p = Paginator(dummyarray, 8)
+
+    p = Paginator(TaskModel.objects.all(), 8)
     page = request.GET.get('page')
     pitems = p.get_page(page)
     nums = 'a' * pitems.paginator.num_pages
@@ -50,7 +53,7 @@ def listitem(request):
     }
     return render(request, 'app_general/listitem.html', context)
 
-def userform(request):
+def taskcreate(request):
     if request.method == 'POST':
         # --DJANGOFORM
         # form = UserForm(request.POST)
@@ -65,13 +68,13 @@ def userform(request):
         # print(input_name)
 
         # --JAVAFORM
-        print(request.POST['myname'])
+        print(request.POST['taskname'])
         messages.success(request, 'ขอบคุณที่ลงชื่อเข้าใช้')
         return redirect('home')
         
     # form = UserForm()
     # context = {'form':form}
-    return render(request, 'app_general/userform.html')
+    return render(request, 'app_general/taskcreate.html')
 
 @allowed_users(allowed_roles=['customer_crud'])
 @login_required(login_url='signin')
