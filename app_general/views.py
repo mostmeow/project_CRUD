@@ -16,21 +16,34 @@ from django.contrib.auth.decorators import login_required
 # custom decorators
 from .decorators import *
 
+# ส่งemail
+from project_crud import settings
+from django.core.mail import send_mail
+from django.core.mail.message import EmailMessage
+#สร้างtokens
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+# dajngoเวอชั่นเก่าใช้force_textแต่เวอชั่น4ขึ้นใช้force_strแทน
+from django.utils.encoding import force_bytes, force_str 
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from .tokens import generate_token
+
+# encode/decode
+import base64
+
+# forms & models
 from .forms import *
 from .models import *
 
 # Create your views here.
 
 
-
-@unauthenticated_user
 def home(request):
 
     # messages.success(request, 'ยินดีต้อนรับ')
 
     return render(request, 'app_general/home.html')
 
-@unauthenticated_user
 def listitem(request):
     # dummyarray = []
     # ranglist = range(100)
@@ -53,6 +66,8 @@ def listitem(request):
     }
     return render(request, 'app_general/listitem.html', context)
 
+@allowed_users(allowed_roles=['customer_crud'])
+@login_required(login_url='signin')
 def taskcreate(request):
     # if request.method == 'POST':
         # --DJANGOFORM
@@ -85,6 +100,7 @@ def signup(request):
     if request.method == 'POST':
         signupname = request.POST['signupname']
         signuppass = request.POST['signuppass']
+        signupemail = request.POST['signupemail']
 
         if User.objects.filter(username=signupname):
             messages.error(request, 'ชื่อผู้ใช้นี้ถูกใช้แล้ว')
@@ -99,7 +115,7 @@ def signup(request):
 
         # create user
         try:
-            myuser = User.objects.create_user(username=signupname, password=signuppass)
+            myuser = User.objects.create_user(username=signupname, password=signuppass, email=signupemail)
             myuser.is_active = True
 
             myuser.save()
@@ -110,6 +126,28 @@ def signup(request):
 
             messages.success(request, 'สร้างบัญชีสำเร็จ')
             # return redirect('home')
+
+            # ส่งอีเมล
+            # gmailที่ใช้ ต้องเปิด2faของมันเอง แล้วไปที่apppasswordเอาpasswordที่generateมาใส่
+
+            current_site = get_current_site(request)
+            email_subject = 'ยินดีต้อนรับสู่"CRUD"'
+            
+            message_greeting = render_to_string('app_general/email/email_greeting.html', {
+                'name':myuser.username,
+            })
+
+            email = EmailMessage(
+                email_subject,
+                message_greeting,
+                settings.EMAIL_HOST_USER,
+                [myuser.email],
+            )
+            email.fail_silently = True
+            email.send()
+
+            messages.success(request, 'โปรดตรวจสอบอีเมลของท่าน')
+
         except:
             messages.error(request, 'ผิดพลาด')
 
@@ -119,19 +157,22 @@ def signup(request):
 def signin(request):
 
     if request.method == 'POST':
-        signinname = request.POST['signinname']
-        signinpass = request.POST['signinpass']
+        try:
+            signinname = request.POST['signinname']
+            signinpass = request.POST['signinpass']
 
-        signinuser = authenticate(username=signinname, password=signinpass)
+            signinuser = authenticate(username=signinname, password=signinpass)
 
-        if signinuser is not None:
-            login(request, signinuser)
-            messages.success(request, 'ลงชื่อเข้าใช้สำเร็จ')
-            return HttpResponseRedirect(reverse('home'))
+            if signinuser is not None:
+                login(request, signinuser)
+                messages.success(request, 'ลงชื่อเข้าใช้สำเร็จ')
+                return redirect('home')
 
-        else:
-            messages.error(request, 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!')
-            return HttpResponseRedirect(reverse('signin'))
+            else:
+                messages.error(request, 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!')
+                return redirect('signin')
+        except:
+            pass
 
     return render(request, 'app_general/signin.html')
 
@@ -139,4 +180,4 @@ def signin(request):
 def signout(request):
     logout(request)
     messages.success(request, 'คุณได้ลงชื่อออกแล้ว')
-    return HttpResponseRedirect(reverse('home'))
+    return redirect('home')

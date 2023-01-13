@@ -3,8 +3,15 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 
+# restframework
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+
 
 from .serializers import TaskSerializer
 
@@ -44,18 +51,22 @@ def taskDetail(request, pk):
 
 @api_view(['POST'])
 def taskCreate(request):
-    # GETD ATA
+    # ==GETD ATA==
 
-    # use Html form
+    # --use Html form--
     # taskname = request.POST['taskname']
     # //
 
-    # use fetch json
-    getdata = json.loads(request.body)
+    # --use fetch json--
+    # getdata = json.loads(request.body)
+    # taskname = getdata['name']
+
+    getdata = request.data
     taskname = getdata['name']
+    # print(taskname)
     # //
     
-    # PREPARE DATA
+    # ==PREPARE DATA==
     serializer = TaskSerializer(data=request.data)
 
     if serializer.is_valid():
@@ -63,7 +74,7 @@ def taskCreate(request):
         this_dict = serializer.validated_data
         this_dict['name'] = taskname
 
-        # print(this_dict)
+        print(this_dict)
         # //
 
         serializer.save()

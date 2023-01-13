@@ -16,6 +16,9 @@
             <span>รหัส</span>
             <input class="form-control" type="password" placeholder="รหัส" aria-label="default input example" name="signuppass">
             
+            <span>อีเมล</span>
+            <input class="form-control" type="email" placeholder="อีเมล" aria-label="default input example" name="signupemail">
+
             <button type="submit" class="btn btn-primary mb-3" id="submitsignup">สมัคร</button>
         </form>
 
@@ -37,8 +40,9 @@
     function validateSignupForm() {
         let signupname = document.forms["mysignup"]["signupname"].value;
         let signuppass = document.forms["mysignup"]["signuppass"].value;
+        let signupemail = document.forms["mysignup"]["signupemail"].value;
         
-        if (signupname == "" || signuppass == "") {
+        if (signupname == "" || signuppass == "" || signupemail == "") {
 
             alertdiv.style.display = "block"
             alertdiv.innerHTML = "กรุณาเติมช่องว่าง"
