@@ -99,9 +99,6 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                page: 1,
-            }),
         })
         .then(response => response.json())
         .then(data => {

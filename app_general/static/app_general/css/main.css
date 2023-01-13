@@ -111,7 +111,7 @@ i {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
-.listitemdiv div {
+.listitemdiv .listitem {
     justify-content: center;
     align-items: center;
     text-align: center;

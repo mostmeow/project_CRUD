@@ -35,6 +35,9 @@ import base64
 from .forms import *
 from .models import *
 
+# custom message leve
+SIGNUPSUCCESS = 50
+
 # Create your views here.
 
 
@@ -45,25 +48,21 @@ def home(request):
     return render(request, 'app_general/home.html')
 
 def listitem(request):
-    # dummyarray = []
-    # ranglist = range(100)
 
-    # for i in ranglist:
-    #     dummyarray.append(i)
+    # ==GET FROM DATABASE==
+    try:
+        p = Paginator(TaskModel.objects.all(), 8)
+        page = request.GET.get('page')
+        pitems = p.get_page(page)
+        nums = 'a' * pitems.paginator.num_pages
 
-    # p = Paginator(ProductModel.objects.all(), 8)
-    # p = Paginator(dummyarray, 8)
-
-    p = Paginator(TaskModel.objects.all(), 8)
-    page = request.GET.get('page')
-    pitems = p.get_page(page)
-    nums = 'a' * pitems.paginator.num_pages
-
-    context = {
-        # 'dummyarray':dummyarray,
-        'pitems':pitems,
-        'nums':nums,
-    }
+        context = {
+            'pitems':pitems,
+            'nums':nums,
+        }
+    except:
+        context = {}
+        
     return render(request, 'app_general/listitem.html', context)
 
 @allowed_users(allowed_roles=['customer_crud'])
@@ -125,6 +124,7 @@ def signup(request):
             myuser.groups.add(group)
 
             messages.success(request, 'สร้างบัญชีสำเร็จ')
+            messages.add_message(request, SIGNUPSUCCESS, 'โปรดตรวจสอบอีเมลของท่าน')
             # return redirect('home')
 
             # ส่งอีเมล
@@ -145,8 +145,6 @@ def signup(request):
             )
             email.fail_silently = True
             email.send()
-
-            messages.success(request, 'โปรดตรวจสอบอีเมลของท่าน')
 
         except:
             messages.error(request, 'ผิดพลาด')

@@ -5,10 +5,16 @@
 <section class="lisitemsec">
 
     <div class="listitemdiv">
+        {% if pitems is None %}
+            <div class="alert alert-warning" role="alert">
+                เกิดผิดพลาด กรุณาลองใหม่
+            </div>
+        {% endif %}
+
         <!-- https://codepen.io/sdthornton/pen/wBZdXq -->
         {% for item in pitems %}
-            <div>
-                {{item.name}}
+            <div class="listitem">
+                {{ item.name }}
             </div>
         {% endfor %}
     </div>
@@ -73,5 +79,51 @@
         </ul>
     </nav>
 
+    <section class="testsec" style="display: grid;">
+        "TEST FOR RENDER FETCH DATA"
+        <div class="spinner-border text-primary" id="testsecspinner" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </section>
+
 </section>
+
+<script>
+    function GetfromApiview() {
+
+        const testsec = document.querySelector('.testsec')
+        const testsecspinner = document.querySelector('#testsecspinner')
+
+        testsecspinner.style.display = "block"
+
+        var url = 'apitask-list/'
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data)
+
+            data.forEach(e => {
+                console.log(e)
+                const para = document.createElement("div");
+                para.innerHTML = e.name
+                testsec.appendChild(para)
+            });
+
+            testsecspinner.style.display = "none"
+
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        })
+
+    }
+    GetfromApiview();
+
+</script>
 {% endblock %}
