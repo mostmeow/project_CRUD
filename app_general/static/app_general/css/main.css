@@ -8,7 +8,7 @@
 
 :root {
     /* main edit */
-    --blue: #eb345e;
+    --shade1: #eb345e;
     --white: #ffffff;
 
     --normalbtn: 50px;
@@ -52,7 +52,7 @@ i {
 
 .firsticon {
     font-size: var(--normalbtn);
-    color: var(--blue);
+    color: var(--shade1);
 }
 
 /* ------ */
@@ -73,6 +73,28 @@ i {
 #icon1:hover img {
     transform: scale(1.2);
 }
+
+
+.svgiconsec .svgicon {
+    margin: 10px;
+}
+.svgiconsec .svgicon svg {
+    fill: none;
+    width: 40px;
+    height: 40px;
+    transition: 0.3s ease-in-out;
+}
+.svgiconsec .svgicon svg:hover {
+    transform: scale(1.2);
+}
+.svgiconsec div path {
+    stroke: black;
+    transition: 0.3s ease-in-out;
+}
+.svgiconsec .svgicon svg:hover path {
+    stroke: var(--shade1);
+}
+
 
 /* SIGNUP */
 .signupsec {
