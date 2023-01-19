@@ -47,6 +47,31 @@ def home(request):
 
     return render(request, 'app_general/home.html')
 
+def createtest(request):
+
+    form = FriendForm()
+    if request.method == 'POST':
+
+        getfriendname = request.POST['friendname']
+        friendimage = request.FILES.get('friendimage')
+        print(getfriendname, friendimage)
+
+        form = FriendForm(request.POST)
+        if form.is_valid():
+            form.save()
+            getdata = form.save(commit=False)
+            print(getdata.id)
+
+            datafriend = FriendModel.objects.get(id=getdata.id)
+            datafriend.name = getfriendname
+            datafriend.image = friendimage
+            datafriend.save()
+    
+    context = {
+        'form':form,
+    }
+    return render(request, 'app_general/createtest.html', context)
+
 def listitem(request):
 
     # ==GET FROM DATABASE==
