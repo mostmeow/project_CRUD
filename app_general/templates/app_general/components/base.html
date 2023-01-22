@@ -36,6 +36,32 @@
     <!-- LOTTIE -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
+    <!-- FACEBOOK SDK -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '{your-app-id}',
+                cookie     : true,
+                xfbml      : true,
+                version    : '{api-version}'
+        });
+            
+        FB.AppEvents.logPageView();   
+            
+        };
+    
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- FACEBOOK BTN -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=6032412496802203&autoLogAppEvents=1" nonce="90KX8dFm"></script>
+
     <title>CRUD</title>
 </head>
 <body>
@@ -52,6 +78,18 @@
     <!-- <script src="{% static 'app_general/js/infinitesnap.js' %}"></script> -->
     <script src="{% static 'app_general/js/initial_toast_bootstrap.js' %}"></script>
     <script src="{% static 'app_general/js/initial_modal_bootstrap.js' %}"></script>
+    
+    <!-- FACEBOOK CHECK -->
+    <script>
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+                return response
+            }).then((data) => {
+                console.log(data)
+            })
+        }
+    </script>
 
 </body>
 </html>
