@@ -11,6 +11,9 @@ urlpatterns = [
     path('signin', views.signin, name='signin'),
     path('signout', views.signout, name='signout'),
 
+    # name is all auth package setup
+    path('sociallogin', views.sociallogin, name='account_login'),
+
     path('createtest', views.createtest, name='createtest'),
 
     path('testsend', views.testsend, name='testsend'),

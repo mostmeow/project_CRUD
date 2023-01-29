@@ -1,5 +1,4 @@
-{% load socialaccount %}
-{% providers_media_js %}
+
 <!-- https://codepen.io/kimberlypangilinan/pen/RwBRzVZ -->
 
 <nav class="nav">
@@ -36,24 +35,23 @@
                     ลงชื่อเข้าใช้
                 </button>
             </a>
+            <a href="{% url 'account_login' %}">
+                <button class="btn btn-secondary">
+                    Social Login
+                </button>
+            </a>
             <a href="{% url 'signup' %}">
                 <button class="btn btn-primary">
                     สร้างบัญชี
                 </button>
             </a>
-            <!-- <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a> -->
-            <fb:login-button 
+            <!-- <fb:login-button 
                 scope="public_profile,email"
                 onlogin="checkLoginState();"
             >
             </fb:login-button>
-            <div class="fb-login-button" data-width="" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+            <div class="fb-login-button" data-width="" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
             
-            <a href="{% provider_login_url 'facebook' method='js_sdk' %}">
-                <button>
-                    Facebook Connect
-                </button>
-            </a>
         {% endif %}
     </div>
 

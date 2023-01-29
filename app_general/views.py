@@ -47,6 +47,10 @@ def home(request):
 
     return render(request, 'app_general/home.html')
 
+def sociallogin(request):
+
+    return render(request, 'app_general/sociallogin.html')
+
 def testsend(request):
     if request.method == 'POST':
 
