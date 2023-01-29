@@ -165,7 +165,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'projectcrud',
         'USER': 'postgres',
-        'PASSWORD': '@Engineer52',
+        'PASSWORD': 'forwork12345',
         'HOST': 'localhost',
         'POST': '5432',
     }

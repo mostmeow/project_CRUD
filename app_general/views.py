@@ -47,6 +47,35 @@ def home(request):
 
     return render(request, 'app_general/home.html')
 
+def testsend(request):
+    if request.method == 'POST':
+
+        price = request.POST['price']
+        id = request.POST['id']
+
+        print(price, id)
+
+        data = {
+            'price':price,
+            'id':id,
+        }
+        json_data = json.dumps(data)
+        json_data_encoded = urlsafe_base64_encode(force_bytes(json_data))
+        return redirect('testget', data=json_data_encoded)
+    return render(request, 'app_general/testsend.html')
+
+def testget(request, data):
+    json_decoded_data = force_str(urlsafe_base64_decode(data))
+    jsondata = json.loads(json_decoded_data)
+    price = jsondata['price']
+    id = jsondata['id']
+
+    context = {
+        'price':price,
+        'id':id,
+    }
+    return render(request, 'app_general/testget.html', context)
+
 def createtest(request):
 
     form = FriendForm()

@@ -12,4 +12,9 @@ urlpatterns = [
     path('signout', views.signout, name='signout'),
 
     path('createtest', views.createtest, name='createtest'),
+
+    path('testsend', views.testsend, name='testsend'),
+    path('testget/<str:data>', views.testget, name='testget'),
+
+
 ]

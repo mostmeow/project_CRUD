@@ -1,0 +1,16 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+    <form method="post" action="{% url 'testsend' %}" name="testform">
+        {% csrf_token %}
+        <label>price</label>
+        <input type="number" name="price">
+        <label>id</label>
+        <input type="number" name="id">
+
+        <button type="submit">go</button>
+    </form>
+</section>
+{% endblock %}
